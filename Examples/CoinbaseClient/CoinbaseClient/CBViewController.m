@@ -195,9 +195,9 @@
 //        NSLog(@"%@", price);
 //    }];
     
-    [CBExchange getSupportedCurrencies:^(NSDictionary *result, NSError *error) {
-        NSLog(@"%@", result);
-    }];
+//    [CBExchange getSupportedCurrencies:^(NSDictionary *result, NSError *error) {
+//        NSLog(@"%@", result);
+//    }];
 }
 
 - (void)auth
