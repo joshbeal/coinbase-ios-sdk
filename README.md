@@ -13,8 +13,8 @@ This open-source iOS library allows you to integrate Coinbase into your iOS appl
 * Capture Coinbase schema in your application
 ``` objective-c
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    [Coinbase handleUrl:url];
-    return YES;
+    	[Coinbase handleUrl:url];
+    	return YES;
 }
 ```
 
