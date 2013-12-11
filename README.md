@@ -38,7 +38,7 @@ it simply add the following line to your Podfile:
 
 ## Author
 
-Josh Beal, jbeal24@gmail.com
+Josh Beal, jbeal24@gmail.com, [18XTMe1DwAVkpVMFmsN2YAb5FDbGcwKip](bitcoin:18XTMe1DwAVkpVMFmsN2YAb5FDbGcwKipG)
 
 ## License
 
