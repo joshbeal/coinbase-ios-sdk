@@ -194,6 +194,10 @@
 //    [CBExchange getSpotRateForCurrency:@"USD" withHandler:^(NSString *price) {
 //        NSLog(@"%@", price);
 //    }];
+    
+    [CBExchange getSupportedCurrencies:^(NSDictionary *result, NSError *error) {
+        NSLog(@"%@", result);
+    }];
 }
 
 - (void)auth

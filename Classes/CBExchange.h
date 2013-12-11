@@ -10,8 +10,6 @@
 #import "CBRequest.h"
 
 typedef void (^PriceHandler)(NSString *price, NSError *error);
-typedef void (^ExchangeRatesHandler)(NSDictionary *entries, NSError *error);
-typedef void (^SupportedCurrenciesHandler)(NSArray *entries, NSError *error);
 
 @interface CBExchange : NSObject
 
@@ -24,7 +22,7 @@ typedef void (^SupportedCurrenciesHandler)(NSArray *entries, NSError *error);
 + (void)buyBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;
 + (void)sellBitcoin:(NSNumber*)qty withHandler:(CBResponseHandler)handler;
 
-+ (void)getExchangeRates:(ExchangeRatesHandler)handler;
-+ (void)getSupportedCurrencies:(SupportedCurrenciesHandler)handler;
++ (void)getExchangeRates:(CBResponseHandler)handler;
++ (void)getSupportedCurrencies:(CBResponseHandler)handler;
 
 @end

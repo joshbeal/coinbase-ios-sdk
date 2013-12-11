@@ -100,13 +100,13 @@
     }];
 }
 
-+ (void)getExchangeRates:(ExchangeRatesHandler)handler {
++ (void)getExchangeRates:(CBResponseHandler)handler {
     [CBRequest getRequest:@"https://coinbase.com/api/v1/currencies/exchange_rates" withHandler:^(NSDictionary *result, NSError *error) {
         handler(result, error);
     }];
 }
 
-+ (void)getSupportedCurrencies:(SupportedCurrenciesHandler)handler {
++ (void)getSupportedCurrencies:(CBResponseHandler)handler {
     [CBRequest getRequest:@"https://coinbase.com/api/v1/currencies" withHandler:^(NSDictionary *result, NSError *error) {
         handler(result, error);
     }];

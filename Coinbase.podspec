@@ -12,11 +12,12 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = '10.7'
   s.requires_arc = true
 
-  # s.source_files = 'coinbase-ios-sdk'
+  s.source_files = 'Classes'
 
   # s.ios.exclude_files = 'Classes/osx'
   # s.osx.exclude_files = 'Classes/ios'
   s.public_header_files = 'Classes/*.h'
-  s.frameworks = 'SystemConfiguration', 'MobileCoreServices'
-  s.dependency 'AFNetworking', '~> 1.3.2'
+  s.prefix_header_contents = '#import <SystemConfiguration/SystemConfiguration.h>', '#import <MobileCoreServices/MobileCoreServices.h>'
+  # s.frameworks = 'SystemConfiguration', 'MobileCoreServices'
+  s.dependency 'AFNetworking', '~> 1.3.3'
 end
