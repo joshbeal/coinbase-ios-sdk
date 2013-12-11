@@ -23,7 +23,7 @@ This open-source iOS library allows you to integrate Coinbase into your iOS appl
 
 ## Usage
 
-To run the example project; clone the repo, and run `pod install` from the Project directory first.
+To run the example project; clone the repo, and run `pod install` from the Examples/CoinbaseClient directory first.
 
 ## Requirements
 
