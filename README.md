@@ -1,8 +1,5 @@
 # Coinbase iOS SDK
 
-[![Version](http://cocoapod-badges.herokuapp.com/v/Coinbase/badge.png)](http://cocoadocs.org/docsets/Coinbase)
-[![Platform](http://cocoapod-badges.herokuapp.com/p/Coinbase/badge.png)](http://cocoadocs.org/docsets/Coinbase)
-
 This open-source iOS library allows you to integrate Coinbase into your iOS application.
 
 ##Getting Started
