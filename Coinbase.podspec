@@ -1,36 +1,22 @@
-#
-# Be sure to run `pod spec lint NAME.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# To learn more about the attributes see http://docs.cocoapods.org/specification.html
-#
 Pod::Spec.new do |s|
   s.name         = "Coinbase"
   s.version      = "0.1.0"
-  s.summary      = "A short description of Coinbase."
-  s.description  = <<-DESC
-                    An optional longer description of Coinbase
-
-                    * Markdown format.
-                    * Don't worry about the indent, we strip it!
-                   DESC
-  s.homepage     = "http://EXAMPLE/NAME"
-  s.screenshots  = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.summary      = "Coinbase iOS SDK"
+  s.homepage     = "https://github.com/joshbeal/coinbase-ios-sdk"
   s.license      = 'MIT'
   s.author       = { "Josh Beal" => "jbeal24@gmail.com" }
-  s.source       = { :git => "http://EXAMPLE/NAME.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/joshbeal/coinbase-ios-sdk.git", :tag => s.version.to_s }
 
-  # s.platform     = :ios, '5.0'
+  s.platform     = :ios, '6.0'
   # s.ios.deployment_target = '5.0'
   # s.osx.deployment_target = '10.7'
   s.requires_arc = true
 
-  s.source_files = 'Classes'
-  s.resources = 'Assets'
+  # s.source_files = 'coinbase-ios-sdk'
 
-  s.ios.exclude_files = 'Classes/osx'
-  s.osx.exclude_files = 'Classes/ios'
-  # s.public_header_files = 'Classes/**/*.h'
-  # s.frameworks = 'SomeFramework', 'AnotherFramework'
-  # s.dependency 'JSONKit', '~> 1.4'
+  # s.ios.exclude_files = 'Classes/osx'
+  # s.osx.exclude_files = 'Classes/ios'
+  s.public_header_files = 'Classes/*.h'
+  s.frameworks = 'SystemConfiguration', 'MobileCoreServices'
+  s.dependency 'AFNetworking', '~> 1.3.2'
 end

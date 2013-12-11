@@ -1,13 +1,33 @@
-# Coinbase
+# Coinbase iOS SDK
 
 [![Version](http://cocoapod-badges.herokuapp.com/v/Coinbase/badge.png)](http://cocoadocs.org/docsets/Coinbase)
 [![Platform](http://cocoapod-badges.herokuapp.com/p/Coinbase/badge.png)](http://cocoadocs.org/docsets/Coinbase)
+
+This open-source iOS library allows you to integrate Coinbase into your iOS application.
+
+##Getting Started
+
+* Register your application on the [Coinbase website](https://coinbase.com/oauth/applications).
+
+* Set **Callback url** to cb\[clientId\]://authorize (first enter some default until clientId is returned).
+
+* Make sure you've edited your application's .plist file properly, so that your applicaition binds to the cb\[clientId\]:// URL scheme (where "\[clientId\]" is your Coinbase application Client Id).
+
+* Capture Coinbase schema in your application
+``` objective-c
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [Coinbase handleUrl:url];
+    return YES;
+}
+```
 
 ## Usage
 
 To run the example project; clone the repo, and run `pod install` from the Project directory first.
 
 ## Requirements
+
+The library requires iOS 6.0 or above.
 
 ## Installation
 
@@ -22,5 +42,7 @@ Josh Beal, jbeal24@gmail.com
 
 ## License
 
-Coinbase is available under the MIT license. See the LICENSE file for more info.
+Copyright (C) 2013 [Josh Beal](https://github.com/joshbeal/)
+
+Distributed under the MIT License.
 
