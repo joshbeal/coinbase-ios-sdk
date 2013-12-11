@@ -1,365 +1,838 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		896D1A7318586A1D00CAAD16 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896D1A7218586A1D00CAAD16 /* MobileCoreServices.framework */; };
-		896D1A7518586A2400CAAD16 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896D1A7418586A2400CAAD16 /* SystemConfiguration.framework */; };
-		8977E73418586E4800A137D3 /* bitcoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8977E73318586E4800A137D3 /* bitcoin.png */; };
-		89C1E77D18572FF200F30B53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C1E77C18572FF200F30B53 /* Foundation.framework */; };
-		89C1E77F18572FF200F30B53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C1E77E18572FF200F30B53 /* CoreGraphics.framework */; };
-		89C1E78118572FF200F30B53 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C1E78018572FF200F30B53 /* UIKit.framework */; };
-		89C1E78718572FF200F30B53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89C1E78518572FF200F30B53 /* InfoPlist.strings */; };
-		89C1E78918572FF200F30B53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C1E78818572FF200F30B53 /* main.m */; };
-		89C1E78D18572FF200F30B53 /* CBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C1E78C18572FF200F30B53 /* CBAppDelegate.m */; };
-		89C1E78F18572FF200F30B53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89C1E78E18572FF200F30B53 /* Images.xcassets */; };
-		89C1E7BD1857313C00F30B53 /* CBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C1E7BC1857313C00F30B53 /* CBViewController.m */; };
-		89C1E7C818573F0300F30B53 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 89C1E7C718573F0300F30B53 /* placeholder.jpg */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXFileReference section */
-		175217D6FD374F9D832E17BF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		896D1A7218586A1D00CAAD16 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		896D1A7418586A2400CAAD16 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8977E73318586E4800A137D3 /* bitcoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitcoin.png; sourceTree = "<group>"; };
-		89C1E77918572FF200F30B53 /* CoinbaseClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinbaseClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		89C1E77C18572FF200F30B53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		89C1E77E18572FF200F30B53 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		89C1E78018572FF200F30B53 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		89C1E78418572FF200F30B53 /* CoinbaseClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoinbaseClient-Info.plist"; sourceTree = "<group>"; };
-		89C1E78618572FF200F30B53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		89C1E78818572FF200F30B53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		89C1E78A18572FF200F30B53 /* CoinbaseClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoinbaseClient-Prefix.pch"; sourceTree = "<group>"; };
-		89C1E78B18572FF200F30B53 /* CBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBAppDelegate.h; sourceTree = "<group>"; };
-		89C1E78C18572FF200F30B53 /* CBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBAppDelegate.m; sourceTree = "<group>"; };
-		89C1E78E18572FF200F30B53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		89C1E79518572FF200F30B53 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		89C1E7BB1857313C00F30B53 /* CBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBViewController.h; sourceTree = "<group>"; };
-		89C1E7BC1857313C00F30B53 /* CBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBViewController.m; sourceTree = "<group>"; };
-		89C1E7C718573F0300F30B53 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		89C1E77618572FF200F30B53 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				896D1A7518586A2400CAAD16 /* SystemConfiguration.framework in Frameworks */,
-				896D1A7318586A1D00CAAD16 /* MobileCoreServices.framework in Frameworks */,
-				89C1E77F18572FF200F30B53 /* CoreGraphics.framework in Frameworks */,
-				89C1E78118572FF200F30B53 /* UIKit.framework in Frameworks */,
-				89C1E77D18572FF200F30B53 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		89C1E77018572FF200F30B53 = {
-			isa = PBXGroup;
-			children = (
-				89C1E78218572FF200F30B53 /* CoinbaseClient */,
-				89C1E77B18572FF200F30B53 /* Frameworks */,
-				89C1E77A18572FF200F30B53 /* Products */,
-				175217D6FD374F9D832E17BF /* Pods.xcconfig */,
-			);
-			sourceTree = "<group>";
-		};
-		89C1E77A18572FF200F30B53 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				89C1E77918572FF200F30B53 /* CoinbaseClient.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		89C1E77B18572FF200F30B53 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				896D1A7418586A2400CAAD16 /* SystemConfiguration.framework */,
-				896D1A7218586A1D00CAAD16 /* MobileCoreServices.framework */,
-				89C1E77C18572FF200F30B53 /* Foundation.framework */,
-				89C1E77E18572FF200F30B53 /* CoreGraphics.framework */,
-				89C1E78018572FF200F30B53 /* UIKit.framework */,
-				89C1E79518572FF200F30B53 /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		89C1E78218572FF200F30B53 /* CoinbaseClient */ = {
-			isa = PBXGroup;
-			children = (
-				89C1E78B18572FF200F30B53 /* CBAppDelegate.h */,
-				89C1E78C18572FF200F30B53 /* CBAppDelegate.m */,
-				89C1E7BB1857313C00F30B53 /* CBViewController.h */,
-				89C1E7BC1857313C00F30B53 /* CBViewController.m */,
-				89C1E78E18572FF200F30B53 /* Images.xcassets */,
-				89C1E78318572FF200F30B53 /* Supporting Files */,
-			);
-			path = CoinbaseClient;
-			sourceTree = "<group>";
-		};
-		89C1E78318572FF200F30B53 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8977E73318586E4800A137D3 /* bitcoin.png */,
-				89C1E7C718573F0300F30B53 /* placeholder.jpg */,
-				89C1E78418572FF200F30B53 /* CoinbaseClient-Info.plist */,
-				89C1E78518572FF200F30B53 /* InfoPlist.strings */,
-				89C1E78818572FF200F30B53 /* main.m */,
-				89C1E78A18572FF200F30B53 /* CoinbaseClient-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		89C1E77818572FF200F30B53 /* CoinbaseClient */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 89C1E7A518572FF200F30B53 /* Build configuration list for PBXNativeTarget "CoinbaseClient" */;
-			buildPhases = (
-				D66E4A1120624461A72E1705 /* Check Pods Manifest.lock */,
-				89C1E77518572FF200F30B53 /* Sources */,
-				89C1E77618572FF200F30B53 /* Frameworks */,
-				89C1E77718572FF200F30B53 /* Resources */,
-				6BD67A7074CB41BCAF31E053 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CoinbaseClient;
-			productName = CoinbaseClient;
-			productReference = 89C1E77918572FF200F30B53 /* CoinbaseClient.app */;
-			productType = "com.apple.product-type.application";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		89C1E77118572FF200F30B53 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				CLASSPREFIX = CB;
-				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = CoinbaseClient;
-			};
-			buildConfigurationList = 89C1E77418572FF200F30B53 /* Build configuration list for PBXProject "CoinbaseClient" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 89C1E77018572FF200F30B53;
-			productRefGroup = 89C1E77A18572FF200F30B53 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				89C1E77818572FF200F30B53 /* CoinbaseClient */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		89C1E77718572FF200F30B53 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				89C1E78718572FF200F30B53 /* InfoPlist.strings in Resources */,
-				89C1E7C818573F0300F30B53 /* placeholder.jpg in Resources */,
-				8977E73418586E4800A137D3 /* bitcoin.png in Resources */,
-				89C1E78F18572FF200F30B53 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		6BD67A7074CB41BCAF31E053 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D66E4A1120624461A72E1705 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		89C1E77518572FF200F30B53 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				89C1E78918572FF200F30B53 /* main.m in Sources */,
-				89C1E7BD1857313C00F30B53 /* CBViewController.m in Sources */,
-				89C1E78D18572FF200F30B53 /* CBAppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		89C1E78518572FF200F30B53 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				89C1E78618572FF200F30B53 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		89C1E7A318572FF200F30B53 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-			};
-			name = Debug;
-		};
-		89C1E7A418572FF200F30B53 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		89C1E7A618572FF200F30B53 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 175217D6FD374F9D832E17BF /* Pods.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoinbaseClient/CoinbaseClient-Prefix.pch";
-				INFOPLIST_FILE = "CoinbaseClient/CoinbaseClient-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		89C1E7A718572FF200F30B53 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 175217D6FD374F9D832E17BF /* Pods.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoinbaseClient/CoinbaseClient-Prefix.pch";
-				INFOPLIST_FILE = "CoinbaseClient/CoinbaseClient-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		89C1E77418572FF200F30B53 /* Build configuration list for PBXProject "CoinbaseClient" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				89C1E7A318572FF200F30B53 /* Debug */,
-				89C1E7A418572FF200F30B53 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		89C1E7A518572FF200F30B53 /* Build configuration list for PBXNativeTarget "CoinbaseClient" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				89C1E7A618572FF200F30B53 /* Debug */,
-				89C1E7A718572FF200F30B53 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = 89C1E77118572FF200F30B53 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>175217D6FD374F9D832E17BF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Pods.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>58B8289062904964B4B602A3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C8AC69C12D04454D913F14FD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6BD67A7074CB41BCAF31E053</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Pods-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>896D1A7218586A1D00CAAD16</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>MobileCoreServices.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/MobileCoreServices.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>896D1A7318586A1D00CAAD16</key>
+		<dict>
+			<key>fileRef</key>
+			<string>896D1A7218586A1D00CAAD16</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>896D1A7418586A2400CAAD16</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>SystemConfiguration.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/SystemConfiguration.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>896D1A7518586A2400CAAD16</key>
+		<dict>
+			<key>fileRef</key>
+			<string>896D1A7418586A2400CAAD16</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8977E73318586E4800A137D3</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.png</string>
+			<key>path</key>
+			<string>bitcoin.png</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8977E73418586E4800A137D3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8977E73318586E4800A137D3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E77018572FF200F30B53</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>89C1E78218572FF200F30B53</string>
+				<string>89C1E77B18572FF200F30B53</string>
+				<string>89C1E77A18572FF200F30B53</string>
+				<string>175217D6FD374F9D832E17BF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E77118572FF200F30B53</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>CLASSPREFIX</key>
+				<string>CB</string>
+				<key>LastUpgradeCheck</key>
+				<string>0500</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>CoinbaseClient</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>89C1E77418572FF200F30B53</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>89C1E77018572FF200F30B53</string>
+			<key>productRefGroup</key>
+			<string>89C1E77A18572FF200F30B53</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>89C1E77818572FF200F30B53</string>
+			</array>
+		</dict>
+		<key>89C1E77418572FF200F30B53</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>89C1E7A318572FF200F30B53</string>
+				<string>89C1E7A418572FF200F30B53</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>89C1E77518572FF200F30B53</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>89C1E78918572FF200F30B53</string>
+				<string>89C1E7BD1857313C00F30B53</string>
+				<string>89C1E78D18572FF200F30B53</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>89C1E77618572FF200F30B53</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>896D1A7518586A2400CAAD16</string>
+				<string>896D1A7318586A1D00CAAD16</string>
+				<string>89C1E77F18572FF200F30B53</string>
+				<string>89C1E78118572FF200F30B53</string>
+				<string>89C1E77D18572FF200F30B53</string>
+				<string>58B8289062904964B4B602A3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>89C1E77718572FF200F30B53</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>89C1E78718572FF200F30B53</string>
+				<string>89C1E7C818573F0300F30B53</string>
+				<string>8977E73418586E4800A137D3</string>
+				<string>89C1E78F18572FF200F30B53</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>89C1E77818572FF200F30B53</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>89C1E7A518572FF200F30B53</string>
+			<key>buildPhases</key>
+			<array>
+				<string>D66E4A1120624461A72E1705</string>
+				<string>89C1E77518572FF200F30B53</string>
+				<string>89C1E77618572FF200F30B53</string>
+				<string>89C1E77718572FF200F30B53</string>
+				<string>6BD67A7074CB41BCAF31E053</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>CoinbaseClient</string>
+			<key>productName</key>
+			<string>CoinbaseClient</string>
+			<key>productReference</key>
+			<string>89C1E77918572FF200F30B53</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>89C1E77918572FF200F30B53</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>CoinbaseClient.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>89C1E77A18572FF200F30B53</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>89C1E77918572FF200F30B53</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E77B18572FF200F30B53</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>896D1A7418586A2400CAAD16</string>
+				<string>896D1A7218586A1D00CAAD16</string>
+				<string>89C1E77C18572FF200F30B53</string>
+				<string>89C1E77E18572FF200F30B53</string>
+				<string>89C1E78018572FF200F30B53</string>
+				<string>89C1E79518572FF200F30B53</string>
+				<string>C8AC69C12D04454D913F14FD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E77C18572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>89C1E77D18572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E77C18572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E77E18572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>89C1E77F18572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E77E18572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E78018572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>89C1E78118572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E78018572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E78218572FF200F30B53</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>89C1E78B18572FF200F30B53</string>
+				<string>89C1E78C18572FF200F30B53</string>
+				<string>89C1E7BB1857313C00F30B53</string>
+				<string>89C1E7BC1857313C00F30B53</string>
+				<string>89C1E78E18572FF200F30B53</string>
+				<string>89C1E78318572FF200F30B53</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>CoinbaseClient</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78318572FF200F30B53</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>8977E73318586E4800A137D3</string>
+				<string>89C1E7C718573F0300F30B53</string>
+				<string>89C1E78418572FF200F30B53</string>
+				<string>89C1E78518572FF200F30B53</string>
+				<string>89C1E78818572FF200F30B53</string>
+				<string>89C1E78A18572FF200F30B53</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78418572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>CoinbaseClient-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78518572FF200F30B53</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>89C1E78618572FF200F30B53</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78618572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78718572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E78518572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E78818572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>main.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78918572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E78818572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E78A18572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>CoinbaseClient-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78B18572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>CBAppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78C18572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>CBAppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78D18572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E78C18572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E78E18572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E78F18572FF200F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E78E18572FF200F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E79518572FF200F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>89C1E7A318572FF200F30B53</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>armv7</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>89C1E7A418572FF200F30B53</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>armv7</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>NO</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>89C1E7A518572FF200F30B53</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>89C1E7A618572FF200F30B53</string>
+				<string>89C1E7A718572FF200F30B53</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>89C1E7A618572FF200F30B53</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>175217D6FD374F9D832E17BF</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>CoinbaseClient/CoinbaseClient-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>CoinbaseClient/CoinbaseClient-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>89C1E7A718572FF200F30B53</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>175217D6FD374F9D832E17BF</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>CoinbaseClient/CoinbaseClient-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>CoinbaseClient/CoinbaseClient-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>89C1E7BB1857313C00F30B53</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>CBViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E7BC1857313C00F30B53</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>CBViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E7BD1857313C00F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E7BC1857313C00F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>89C1E7C718573F0300F30B53</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>image.jpeg</string>
+			<key>path</key>
+			<string>placeholder.jpg</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89C1E7C818573F0300F30B53</key>
+		<dict>
+			<key>fileRef</key>
+			<string>89C1E7C718573F0300F30B53</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C8AC69C12D04454D913F14FD</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>D66E4A1120624461A72E1705</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>89C1E77118572FF200F30B53</string>
+</dict>
+</plist>
