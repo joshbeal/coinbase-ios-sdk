@@ -40,7 +40,7 @@ it simply add the following line to your Podfile:
 
 Josh Beal, jbeal24@gmail.com
 
-<a href="bitcoin:18XTMe1DwAVkpVMFmsN2YAb5FDbGcwKipG">18XTMe1DwAVkpVMFmsN2YAb5FDbGcwKipG</a>
+18XTMe1DwAVkpVMFmsN2YAb5FDbGcwKipG
 
 ## License
 
