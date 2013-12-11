@@ -89,7 +89,7 @@
 + (void)resend:(NSString*)requestId withHandler:(RequestActionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
-            handler(nil, error);
+            handler(NO, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
                 AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
@@ -101,7 +101,7 @@
                 AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                     handler([[JSON objectForKey:@"success"] boolValue], nil);
                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                    handler(nil, error);
+                    handler(NO, error);
                 }];
                 [operation start];
             }];
@@ -112,7 +112,7 @@
 + (void)cancel:(NSString*)requestId withHandler:(RequestActionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
-            handler(nil, error);
+            handler(NO, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
                 AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
@@ -124,7 +124,7 @@
                 AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                     handler([[JSON objectForKey:@"success"] boolValue], nil);
                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                    handler(nil, error);
+                    handler(NO, error);
                 }];
                 [operation start];
             }];
