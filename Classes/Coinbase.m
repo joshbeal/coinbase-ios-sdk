@@ -15,7 +15,7 @@ static NSString* _clientSecret;
 static LoginHandler loginBlock;
 
 @interface Coinbase ()
-+ (void)getAuthCode;
++ (void)getAuthCode:(NSString *)scope;
 @end
 
 @implementation Coinbase
@@ -43,7 +43,12 @@ static LoginHandler loginBlock;
 
 + (void)login:(LoginHandler)handler {
     loginBlock = handler;
-    [self getAuthCode];
+    [self getAuthCode:@"all"];
+}
+
++ (void)loginWithScope:(NSArray *)permissions withHandler:(LoginHandler)handler {
+    loginBlock = handler;
+    [self getAuthCode:[permissions componentsJoinedByString:@"+"]];
 }
 
 + (void)logout {
@@ -97,8 +102,8 @@ static LoginHandler loginBlock;
     }
 }
 
-+ (void)getAuthCode {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=all", [Coinbase getClientId], [Coinbase getCallbackUrl]]]];
++ (void)getAuthCode:(NSString *)scope {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]];
 }
 
 + (NSString *)apiToken {

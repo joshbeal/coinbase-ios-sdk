@@ -20,9 +20,10 @@ typedef void (^LoginHandler)(NSError *error);
 + (NSString *)getClientSecret;
 + (NSString *)getCallbackUrl;
 
-+ (void)setClientId:(NSString* )clientId clientSecret:(NSString *)clientSecret;
++ (void)setClientId:(NSString *)clientId clientSecret:(NSString *)clientSecret;
 
 + (void)login:(LoginHandler)handler;
++ (void)loginWithScope:(NSArray *)permissions withHandler:(LoginHandler)handler;
 + (void)logout;
 
 + (void)handleUrl:(NSURL *)url;
