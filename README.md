@@ -8,7 +8,7 @@ This open-source iOS library allows you to integrate Coinbase into your iOS appl
 
 * Set **Callback url** to cb\[clientId\]://authorize (first enter some default until clientId is returned).
 
-* Make sure you've edited your application's .plist file properly, so that your applicaition binds to the cb\[clientId\]:// URL scheme (where "\[clientId\]" is your Coinbase application Client Id).
+* Make sure you've edited your application's .plist file properly, so that your application binds to the cb\[clientId\]:// URL scheme (where "\[clientId\]" is your Coinbase application Client Id).
 
 * Capture Coinbase schema in your application
 ``` objective-c
