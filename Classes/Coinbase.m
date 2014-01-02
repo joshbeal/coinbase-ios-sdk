@@ -13,6 +13,7 @@ static BOOL isAuthenticated = NO;
 static NSString* _clientId;
 static NSString* _clientSecret;
 static LoginHandler loginBlock;
+static NSString *permissionsList;
 
 @interface Coinbase ()
 + (void)getAuthCode:(NSString *)scope;
@@ -43,12 +44,22 @@ static LoginHandler loginBlock;
 
 + (void)login:(LoginHandler)handler {
     loginBlock = handler;
-    [self getAuthCode:@"all"];
+    permissionsList = @"all";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"]) {
+        [self getAccessToken:permissionsList];
+    } else {
+        [self getAuthCode:permissionsList];
+    }
 }
 
 + (void)loginWithScope:(NSArray *)permissions withHandler:(LoginHandler)handler {
     loginBlock = handler;
-    [self getAuthCode:[permissions componentsJoinedByString:@"+"]];
+    permissionsList = [permissions componentsJoinedByString:@"+"];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"]) {
+        [self getAccessToken:permissionsList];
+    } else {
+        [self getAuthCode:permissionsList];
+    }
 }
 
 + (void)logout {
@@ -59,7 +70,7 @@ static LoginHandler loginBlock;
     isAuthenticated = NO;
 }
 
-+ (void)getAccessToken {
++ (void)getAccessToken:(NSString*)permissions {
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
@@ -103,7 +114,7 @@ static LoginHandler loginBlock;
 }
 
 + (void)getAuthCode:(NSString *)scope {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getAuthCode" object:nil userInfo:@{@"url":[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
 }
 
 + (NSString *)apiToken {
@@ -114,7 +125,7 @@ static LoginHandler loginBlock;
     NSArray *components =[[url description] componentsSeparatedByString:@"?"];
     NSString *authCode = [[components objectAtIndex:1] substringFromIndex:5];
     [[NSUserDefaults standardUserDefaults] setObject:authCode forKey:@"authCode"];
-    [self getAccessToken];
+    [self getAccessToken:permissionsList];
 }
 
 + (void)getAccount:(AccountHandler)handler {
