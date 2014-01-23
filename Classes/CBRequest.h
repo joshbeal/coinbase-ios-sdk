@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFHTTPClient.h>
-#import <AFNetworking/AFJSONRequestOperation.h>
+#import <AFNetworking/AFNetworking.h>
 
 typedef void (^CBResponseHandler)(NSDictionary *result, NSError* error);
 

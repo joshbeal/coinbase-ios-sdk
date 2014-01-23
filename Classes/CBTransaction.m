@@ -36,23 +36,22 @@
             handler(nil, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
-                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
-                [httpClient setParameterEncoding:AFJSONParameterEncoding];
                 NSDictionary *params = @{@"transaction" : @{
                                                  @"to": address,
                                                  @"amount": amount,
                                                  @"notes": notes
                                                  }};
-                NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST"
-                                                                        path:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/send_money?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]
-                                                                  parameters:params];
-                httpClient.parameterEncoding = AFJSONParameterEncoding;
-                AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/send_money?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+                    
                     handler([self parseTransaction:JSON forAccount:account], nil);
-                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                    NSLog(nil, error);
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    handler(nil, error);
                 }];
-                [operation start];
             }];
         }
     }];
@@ -64,23 +63,22 @@
             handler(nil, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
-                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
-                [httpClient setParameterEncoding:AFJSONParameterEncoding];
                 NSDictionary *params = @{@"transaction" : @{
                                                  @"from": address,
                                                  @"amount": amount,
                                                  @"notes": notes
                                                  }};
-                NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST"
-                                                                        path:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/request_money?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]
-                                                                  parameters:params];
-                httpClient.parameterEncoding = AFJSONParameterEncoding;
-                AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/request_money?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+                    
                     handler([self parseTransaction:JSON forAccount:account], nil);
-                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                    NSLog(nil, error);
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    handler(nil, error);
                 }];
-                [operation start];
             }];
         }
     }];
@@ -92,18 +90,16 @@
             handler(NO, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
-                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
-                [httpClient setParameterEncoding:AFJSONParameterEncoding];
-                NSMutableURLRequest *request = [httpClient requestWithMethod:@"PUT"
-                                                                        path:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/%@/resend_request?access_token=%@", requestId, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]
-                                                                  parameters:nil];
-                httpClient.parameterEncoding = AFJSONParameterEncoding;
-                AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager PUT:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/%@/resend_request?access_token=%@", requestId, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+                    
                     handler([[JSON objectForKey:@"success"] boolValue], nil);
-                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     handler(NO, error);
                 }];
-                [operation start];
             }];
         }
     }];
@@ -115,18 +111,16 @@
             handler(NO, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
-                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
-                [httpClient setParameterEncoding:AFJSONParameterEncoding];
-                NSMutableURLRequest *request = [httpClient requestWithMethod:@"DELETE"
-                                                                        path:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/%@/cancel_request?access_token=%@", requestId, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]
-                                                                  parameters:nil];
-                httpClient.parameterEncoding = AFJSONParameterEncoding;
-                AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager DELETE:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/%@/cancel_request?access_token=%@", requestId, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+                    
                     handler([[JSON objectForKey:@"success"] boolValue], nil);
-                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     handler(NO, error);
                 }];
-                [operation start];
             }];
         }
     }];
@@ -138,18 +132,16 @@
             handler(nil, error);
         } else {
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
-                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
-                [httpClient setParameterEncoding:AFJSONParameterEncoding];
-                NSMutableURLRequest *request = [httpClient requestWithMethod:@"PUT"
-                                                                        path:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/%@/complete_request?access_token=%@", requestId, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]
-                                                                  parameters:nil];
-                httpClient.parameterEncoding = AFJSONParameterEncoding;
-                AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager PUT:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions/%@/complete_request?access_token=%@", requestId, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+                    
                     handler([self parseTransaction:JSON forAccount:account], nil);
-                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     handler(nil, error);
                 }];
-                [operation start];
             }];
         }
     }];
