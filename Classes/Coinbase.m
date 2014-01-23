@@ -60,45 +60,49 @@ static LoginHandler loginBlock;
 }
 
 + (void)getAccessToken {
-    
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://coinbase.com"]];
-    [httpClient setParameterEncoding:AFJSONParameterEncoding];
-    
     NSString *authCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"];
     NSString *refreshToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"refreshToken"];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"expiryTime"] == nil) {
-        NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST"
-                                                                path:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=authorization_code&code=%@&redirect_uri=%@&client_id=%@&client_secret=%@", authCode, [Coinbase getCallbackUrl], [Coinbase getClientId], [Coinbase getClientSecret]]
-                                                          parameters:nil];
-        httpClient.parameterEncoding = AFJSONParameterEncoding;
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-            [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
-            [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
-            double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
-            isAuthenticated = YES;
-            loginBlock(nil);
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=authorization_code&code=%@&redirect_uri=%@&client_id=%@&client_secret=%@", authCode, [Coinbase getCallbackUrl], [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            NSLog(@"%@", JSON);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
+                double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                isAuthenticated = YES;
+
+                loginBlock(nil);
+            });
+
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             loginBlock(error);
         }];
-        [operation start];
+    
     } else {
-        NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST"
-                                                                path:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@", refreshToken, [Coinbase getClientId], [Coinbase getClientSecret]]
-                                                          parameters:nil];
-        httpClient.parameterEncoding = AFJSONParameterEncoding;
-        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-            [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
-            [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
-            double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
-            isAuthenticated = YES;
-            loginBlock(nil);
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@", refreshToken, [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            NSLog(@"%@", JSON);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
+                double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
+                isAuthenticated = YES;
+
+                loginBlock(nil);
+            });
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             loginBlock(error);
         }];
-        [operation start];
     }
 }
 
@@ -122,9 +126,10 @@ static LoginHandler loginBlock;
         if (error) {
             handler(nil, error);
         } else {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [self apiToken]]];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [self apiToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+
                 CBAccount *account = [[CBAccount alloc] init];
                 account.name = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"name"];
                 account.email = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"email"];
@@ -135,11 +140,12 @@ static LoginHandler loginBlock;
                 account.buyLimit = [[[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"buy_limit"] objectForKey:@"amount"];
                 account.sellLevel = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"sell_level"];
                 account.sellLimit = [[[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"sell_limit"] objectForKey:@"amount"];
+                
                 handler(account, nil);
-            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 handler(nil, error);
             }];
-            [operation start];
         }
     }];
 }

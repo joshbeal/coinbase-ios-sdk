@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Coinbase"
-  s.version      = "0.2.0"
+  s.version      = "0.3.0"
   s.summary      = "Coinbase iOS SDK"
   s.homepage     = "https://github.com/joshbeal/coinbase-ios-sdk"
   s.license      = 'MIT'
@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Classes/*.h'
   s.prefix_header_contents = '#import <SystemConfiguration/SystemConfiguration.h>', '#import <MobileCoreServices/MobileCoreServices.h>'
   # s.frameworks = 'SystemConfiguration', 'MobileCoreServices'
-  s.dependency 'AFNetworking', '~> 1.3.3'
+  s.dependency 'AFNetworking', '~> 2.0'
 end
