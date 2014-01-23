@@ -50,7 +50,7 @@
                 AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                     handler([self parseTransaction:JSON forAccount:account], nil);
                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                    NSLog(nil, error);
+                    handler(nil, error);
                 }];
                 [operation start];
             }];
@@ -78,7 +78,7 @@
                 AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                     handler([self parseTransaction:JSON forAccount:account], nil);
                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                    NSLog(nil, error);
+                    handler(nil, error);
                 }];
                 [operation start];
             }];
