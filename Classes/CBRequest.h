@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
-typedef void (^CBResponseHandler)(NSDictionary *result, NSError* error);
+typedef void (^CBResponseHandler)(id *result, NSError* error);
 
 @interface CBRequest : NSObject
 + (void)authorizedRequest:(CBResponseHandler)handler;

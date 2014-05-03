@@ -105,8 +105,8 @@
     }];
 }
 
-+ (void)getSupportedCurrencies:(CBResponseHandler)handler {
-    [CBRequest getRequest:@"https://coinbase.com/api/v1/currencies" withHandler:^(NSDictionary *result, NSError *error) {
++ (void)getSupportedCurrencies:(CurrenciesHandler)handler {
+    [CBRequest getRequest:@"https://coinbase.com/api/v1/currencies" withHandler:^(id result, NSError *error) {
         handler(result, error);
     }];
 }
