@@ -24,7 +24,7 @@ To run the example project; clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-The library requires iOS 6.0 or above.
+The library requires iOS 6.0 or above and depends on the [AFNetworking](https://github.com/AFNetworking/AFNetworking) library.
 
 ## Installation
 
