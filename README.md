@@ -33,6 +33,10 @@ it simply add the following line to your Podfile:
 
     pod "Coinbase"
 
+Then run the install command::
+
+    pod install
+
 ## Author
 
 Josh Beal, jbeal24@gmail.com
