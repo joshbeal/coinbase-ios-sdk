@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "CBAccount.h"
 
+FOUNDATION_EXPORT NSString *const CB_AUTHCODE_NOTIFICATION_TYPE;
+FOUNDATION_EXPORT NSString *const CB_AUTHCODE_URL_KEY;
+
 typedef void (^AccountHandler)(CBAccount *account, NSError *error);
 typedef void (^LoginHandler)(NSError *error);
 

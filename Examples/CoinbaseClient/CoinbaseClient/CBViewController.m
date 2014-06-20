@@ -136,6 +136,13 @@
     historyLabelBottom.backgroundColor = [UIColor colorWithRed:206/255.0f green:206/255.0f blue:206/255.0f alpha:1.0];
     historyLabelBottom.frame = CGRectMake(0, photoY+125, 320, 1);
     [self.view addSubview:historyLabelBottom];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAuthCode:) name:CB_AUTHCODE_NOTIFICATION_TYPE object:nil];
+}
+
+- (void)getAuthCode:(NSNotification *)notification
+{
+    [[UIApplication sharedApplication] openURL:[[notification userInfo] objectForKey:CB_AUTHCODE_URL_KEY]];
 }
 
 - (void)viewDidAppear:(BOOL)animated

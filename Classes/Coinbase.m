@@ -9,6 +9,9 @@
 #import "Coinbase.h"
 #import "CBRequest.h"
 
+NSString *const CB_AUTHCODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
+NSString *const CB_AUTHCODE_URL_KEY = @"CB_AUTHCODE_URL";
+
 static BOOL isAuthenticated = NO;
 static NSString* _clientId;
 static NSString* _clientSecret;
@@ -119,7 +122,7 @@ static NSString *permissionsList;
 }
 
 + (void)getAuthCode:(NSString *)scope {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getAuthCode" object:nil userInfo:@{@"url":[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CB_AUTHCODE_NOTIFICATION_TYPE object:nil userInfo:@{CB_AUTHCODE_URL_KEY:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
 }
 
 + (NSString *)apiToken {
