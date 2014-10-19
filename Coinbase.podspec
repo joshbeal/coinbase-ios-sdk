@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Coinbase"
-  s.version      = "0.5.1"
+  s.version      = "0.5.2"
   s.summary      = "Coinbase iOS SDK"
   s.homepage     = "https://github.com/joshbeal/coinbase-ios-sdk"
   s.license      = 'MIT'
