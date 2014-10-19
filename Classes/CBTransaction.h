@@ -19,7 +19,7 @@ typedef void (^RequestActionHandler)(BOOL success, NSError *error);
 @property NSString *email;
 @property NSString *amount;
 @property NSString *timestamp;
-@property NSString *hash;
+@property NSString *hsh;
 @property NSString *transactionId;
 @property BOOL sender;
 @property BOOL request;

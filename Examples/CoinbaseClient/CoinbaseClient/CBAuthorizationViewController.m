@@ -45,6 +45,7 @@
     NSString *theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     if (![theTitle isEqualToString:@"Coinbase"]) {
         [Coinbase registerAuthCode:theTitle];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
     NSLog(@"%@", theTitle);
 }

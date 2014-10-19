@@ -122,7 +122,7 @@ static NSString *permissionsList;
 }
 
 + (void)getAuthCode:(NSString *)scope {
-    [[NSNotificationCenter defaultCenter] postNotificationName:CB_AUTHCODE_NOTIFICATION_TYPE object:nil userInfo:@{CB_AUTHCODE_URL_KEY:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CB_AUTH_CODE_NOTIFICATION_TYPE object:nil userInfo:@{CB_AUTH_CODE_URL_KEY:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
 }
 
 + (NSString *)apiToken {
