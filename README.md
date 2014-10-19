@@ -6,7 +6,7 @@ This open-source iOS library allows you to integrate Coinbase into your iOS appl
 
 * Register your application on the [Coinbase website](https://coinbase.com/oauth/applications).
 
-* Set **Callback url** to urn:ietf:wg:oauth:2.0:oob
+* Set **Callback url** to `urn:ietf:wg:oauth:2.0:oob`
 
 ## Usage
 
