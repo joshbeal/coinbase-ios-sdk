@@ -7,6 +7,7 @@
 //
 
 #import "CBAuthorizationViewController.h"
+#import "Coinbase.h"
 
 @interface CBAuthorizationViewController () <UIWebViewDelegate>
 
@@ -28,7 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.view addSubview:self.webView];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -41,6 +43,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    if (![theTitle isEqualToString:@"Coinbase"]) {
+        [Coinbase registerAuthCode:theTitle];
+    }
     NSLog(@"%@", theTitle);
 }
 

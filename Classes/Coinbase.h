@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CBAccount.h"
 
-FOUNDATION_EXPORT NSString *const CB_AUTHCODE_NOTIFICATION_TYPE;
-FOUNDATION_EXPORT NSString *const CB_AUTHCODE_URL_KEY;
-FOUNDATION_EXPORT NSString *const CB_ACCESS_CODE_NOTIFICATION_TYPE;
-FOUNDATION_EXPORT NSString *const CB_ACCESS_CODE_URL_KEY;
-FOUNDATION_EXPORT NSString *const CB_REFRESH_CODE_NOTIFICATION_TYPE;
-FOUNDATION_EXPORT NSString *const CB_REFRESH_CODE_URL_KEY;
+FOUNDATION_EXPORT NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE;
+FOUNDATION_EXPORT NSString *const CB_AUTH_CODE_URL_KEY;
 
 typedef void (^AccountHandler)(CBAccount *account, NSError *error);
 typedef void (^LoginHandler)(NSError *error);
@@ -33,7 +29,7 @@ typedef void (^LoginHandler)(NSError *error);
 + (void)loginWithScope:(NSArray *)permissions withHandler:(LoginHandler)handler;
 + (void)logout;
 
-+ (void)handleUrl:(NSURL *)url;
++ (void)registerAuthCode:(NSString *)authCode;
 
 + (void)getAccount:(AccountHandler)handler;
 

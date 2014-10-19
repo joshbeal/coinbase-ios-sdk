@@ -138,20 +138,12 @@
     historyLabelBottom.frame = CGRectMake(0, photoY+125, 320, 1);
     [self.view addSubview:historyLabelBottom];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAuthCode:) name:CB_AUTHCODE_NOTIFICATION_TYPE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAccessCode:) name:CB_ACCESS_CODE_NOTIFICATION_TYPE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRefreshCode:) name:CB_REFRESH_CODE_NOTIFICATION_TYPE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAuthCode:) name:CB_AUTH_CODE_NOTIFICATION_TYPE object:nil];
 }
-
 
 - (void)getAuthCode:(NSNotification *)notification
 {
-    [[UIApplication sharedApplication] openURL:[[notification userInfo] objectForKey:CB_AUTHCODE_URL_KEY]];
-}
-
-- (void)getAccessCode:(NSNotification *)notification
-{
-    CBAuthorizationViewController *viewController = [[CBAuthorizationViewController alloc] initWithURL:[[notification userInfo] objectForKey:CB_ACCESS_CODE_URL_KEY]];
+    CBAuthorizationViewController *viewController = [[CBAuthorizationViewController alloc] initWithURL:[[notification userInfo] objectForKey:CB_AUTH_CODE_URL_KEY]];
     [self.navigationController presentViewController:viewController animated:NO completion:nil];
 }
 
