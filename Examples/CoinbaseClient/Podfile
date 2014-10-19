@@ -1,5 +1,7 @@
-  pod 'Coinbase', :path => '../..'
-  pod 'NSDate+TimeAgo'
-  pod 'SAMCategories'
-  pod 'SDWebImage'
-  pod 'NSHash', '~> 1.0.1'
+source 'https://github.com/CocoaPods/Specs.git'
+
+pod 'Coinbase', :path => '../..'
+pod 'NSDate+TimeAgo'
+pod 'SAMCategories'
+pod 'SDWebImage'
+pod 'NSHash', '~> 1.0.1'

@@ -17,12 +17,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     CBViewController *landing = [[CBViewController alloc] init];
-    [self.window setRootViewController:landing];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+    navController.navigationBarHidden = YES;
+    [self.window setRootViewController:navController];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [Coinbase setClientId:@"48832465c419280c488190be596bb5de678cf196f2d31f54e16e470d1483a333" clientSecret:@"23c0e8e4c6c1b26c947bf10e8ce6a99bd204d4f9ad295dcd1eb989a4338b8d43"];
+    [Coinbase setClientId:@"0bff1b1cef9540ec6e58e75129f7d1b4bb0248157c7e109e788e4776b321c495" clientSecret:@"b60a1b54dd9968dcbdb86e1eb5989c8e81e0db665e6f78700d931684c80d5a92"];
     
     return YES;
 }

@@ -14,6 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import <Coinbase/Coinbase.h>
 #import <Coinbase/CBExchange.h>
+#import "CBAuthorizationViewController.h"
 
 @interface CBViewController ()
 @property UIView *headerView;
@@ -138,15 +139,20 @@
     [self.view addSubview:historyLabelBottom];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAuthCode:) name:CB_AUTHCODE_NOTIFICATION_TYPE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAccessCode:) name:CB_ACCESS_CODE_NOTIFICATION_TYPE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRefreshCode:) name:CB_REFRESH_CODE_NOTIFICATION_TYPE object:nil];
 }
+
 
 - (void)getAuthCode:(NSNotification *)notification
 {
     [[UIApplication sharedApplication] openURL:[[notification userInfo] objectForKey:CB_AUTHCODE_URL_KEY]];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)getAccessCode:(NSNotification *)notification
 {
+    CBAuthorizationViewController *viewController = [[CBAuthorizationViewController alloc] initWithURL:[[notification userInfo] objectForKey:CB_ACCESS_CODE_URL_KEY]];
+    [self.navigationController presentViewController:viewController animated:NO completion:nil];
 }
 
 - (void)test {
@@ -220,7 +226,7 @@
                     [CBExchange getExchangeRates:^(NSDictionary *entries, NSError *error) {
                         [self.balanceLabel setText:[NSString stringWithFormat:@"Ƀ%.4f ≈ $%.2f", [self.account.balance floatValue], [self.account.balance floatValue] * [[entries objectForKey:@"btc_to_usd"] floatValue]]];
                     }];
-                    [self.photo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [self.account.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                    [self.photo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [self.account.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
                     [self.account getTransactions:^(NSArray *transactions, NSError *error) {
                         self.transactions = [transactions mutableCopy];
                         [self.tableView reloadData];
@@ -315,21 +321,21 @@
         if (transaction.request) {
             description = [NSString stringWithFormat:@"%@ requested bitcoin\n", transaction.name];
             
-            [photo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [transaction.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+            [photo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [transaction.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
         } else {
             description = [NSString stringWithFormat:@"You sent bitcoin to %@\n", transaction.name];
             
-            [photo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [self.account.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+            [photo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [self.account.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
         }
     } else {
         if (transaction.request) {
             description = [NSString stringWithFormat:@"You requested bitcoin from %@\n", transaction.name];
             
-            [photo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [self.account.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+            [photo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [self.account.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
         } else {
             description = [NSString stringWithFormat:@"%@ sent you bitcoin\n", transaction.name];
             
-            [photo setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [transaction.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+            [photo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=200", [transaction.email MD5]]] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
         }
     }
     NSDate *date = [NSDate sam_dateFromISO8601String:transaction.timestamp];
