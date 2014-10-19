@@ -9,8 +9,8 @@
 #import "Coinbase.h"
 #import "CBRequest.h"
 
-NSString *const CB_AUTHCODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
-NSString *const CB_AUTHCODE_URL_KEY = @"CB_AUTHCODE_URL";
+NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
+NSString *const CB_AUTH_CODE_URL_KEY = @"CB_AUTHCODE_URL";
 
 static BOOL isAuthenticated = NO;
 static NSString* _clientId;
