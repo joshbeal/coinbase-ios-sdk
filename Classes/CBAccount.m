@@ -29,7 +29,7 @@
                     transaction.sender = [[[tDict objectForKey:@"sender"] objectForKey:@"email"] isEqualToString:self.email];
                     transaction.name = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"name"] : [[tDict objectForKey:@"sender"] objectForKey:@"name"];
                     if (!([tDict objectForKey:@"hsh"] == [NSNull null])) {
-                        transaction.hash = [tDict objectForKey:@"hsh"];
+                        transaction.hsh = [tDict objectForKey:@"hsh"];
                     }
                     transaction.email = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"email"] : [[tDict objectForKey:@"sender"] objectForKey:@"email"];
                     if (!transaction.name) {

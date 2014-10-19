@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		58B8289062904964B4B602A3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AC69C12D04454D913F14FD /* libPods.a */; };
-		896E439219F35110009C366B /* CBAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E439119F35110009C366B /* CBAuthorizationViewController.m */; };
 		8977E73418586E4800A137D3 /* bitcoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8977E73318586E4800A137D3 /* bitcoin.png */; };
 		89C1E77D18572FF200F30B53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C1E77C18572FF200F30B53 /* Foundation.framework */; };
 		89C1E77F18572FF200F30B53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C1E77E18572FF200F30B53 /* CoreGraphics.framework */; };
@@ -23,8 +22,6 @@
 
 /* Begin PBXFileReference section */
 		37579A9BF437641B4503BB66 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		896E439019F35110009C366B /* CBAuthorizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAuthorizationViewController.h; sourceTree = "<group>"; };
-		896E439119F35110009C366B /* CBAuthorizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAuthorizationViewController.m; sourceTree = "<group>"; };
 		8977E73318586E4800A137D3 /* bitcoin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitcoin.png; sourceTree = "<group>"; };
 		89C1E77918572FF200F30B53 /* CoinbaseClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinbaseClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C1E77C18572FF200F30B53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,8 +94,6 @@
 				89C1E78C18572FF200F30B53 /* CBAppDelegate.m */,
 				89C1E7BB1857313C00F30B53 /* CBViewController.h */,
 				89C1E7BC1857313C00F30B53 /* CBViewController.m */,
-				896E439019F35110009C366B /* CBAuthorizationViewController.h */,
-				896E439119F35110009C366B /* CBAuthorizationViewController.m */,
 				89C1E78E18572FF200F30B53 /* Images.xcassets */,
 				89C1E78318572FF200F30B53 /* Supporting Files */,
 			);
@@ -231,7 +226,6 @@
 				89C1E78918572FF200F30B53 /* main.m in Sources */,
 				89C1E7BD1857313C00F30B53 /* CBViewController.m in Sources */,
 				89C1E78D18572FF200F30B53 /* CBAppDelegate.m in Sources */,
-				896E439219F35110009C366B /* CBAuthorizationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
