@@ -6,17 +6,7 @@ This open-source iOS library allows you to integrate Coinbase into your iOS appl
 
 * Register your application on the [Coinbase website](https://coinbase.com/oauth/applications).
 
-* Set **Callback url** to cb\[clientId\]://authorize (first enter some default until clientId is returned).
-
-* Make sure you've edited your application's .plist file properly, so that your application binds to the cb\[clientId\]:// URL scheme (where "\[clientId\]" is your Coinbase application Client Id).
-
-* Capture Coinbase schema in your application
-``` objective-c
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    	[Coinbase handleUrl:url];
-    	return YES;
-}
-```
+* Set **Callback url** to `urn:ietf:wg:oauth:2.0:oob`
 
 ## Usage
 
@@ -45,7 +35,7 @@ Josh Beal, jbeal24@gmail.com
 
 ## License
 
-Copyright (C) 2013 [Josh Beal](https://github.com/joshbeal/)
+Copyright (C) 2013-2014 [Josh Beal](https://github.com/joshbeal/)
 
 Distributed under the MIT License.
 
