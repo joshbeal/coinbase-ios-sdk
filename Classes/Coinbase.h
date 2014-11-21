@@ -19,6 +19,8 @@ typedef void (^LoginHandler)(NSError *error);
 
 + (BOOL)isAuthenticated;
 
++ (BOOL)hasAuthCode;
+
 + (NSString *)getClientId;
 + (NSString *)getClientSecret;
 + (NSString *)getCallbackUrl;

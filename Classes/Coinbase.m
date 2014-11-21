@@ -28,6 +28,10 @@ static NSString *permissionsList;
     return isAuthenticated;
 }
 
++ (BOOL)hasAuthCode {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"] != nil;
+}
+
 + (NSString *)getClientId {
     return _clientId;
 }
