@@ -21,11 +21,15 @@ typedef void (^RequestActionHandler)(BOOL success, NSError *error);
 @property NSString *timestamp;
 @property NSString *hsh;
 @property NSString *transactionId;
+@property NSArray *errors;
 @property BOOL sender;
 @property BOOL request;
+@property BOOL success;
 
 + (void)send:(NSNumber*)amount to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler;
++ (void)send:(NSNumber *)amount withCurrency:(NSString*)currency to:(NSString *)address withNotes:(NSString *)notes withHandler:(TransactionHandler)handler;
 + (void)request:(NSNumber*)amount from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler;
++ (void)request:(NSNumber*)amount withCurrency:(NSString*)currency from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler;
 
 + (void)resend:(NSString*)requestId withHandler:(RequestActionHandler)handler;
 + (void)cancel:(NSString*)requestId withHandler:(RequestActionHandler)handler;
