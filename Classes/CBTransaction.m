@@ -36,6 +36,10 @@
 }
 
 + (void)send:(NSNumber*)amount to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
+    [self send:amount withCurrency:@"BTC" to:address withNotes:notes withHandler:handler];
+}
+
++ (void)send:(NSNumber*)amount withCurrency:(NSString*)currency to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
             handler(nil, error);
@@ -43,7 +47,8 @@
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
                 NSDictionary *params = @{@"transaction" : @{
                                                  @"to": address,
-                                                 @"amount": amount,
+                                                 @"amount_string": amount,
+                                                 @"amount_currency_iso": currency,
                                                  @"notes": notes
                                                  }};
                 
@@ -61,6 +66,10 @@
 }
 
 + (void)request:(NSNumber*)amount from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
+    [self request:amount withCurrency:@"BTC" from:address withNotes:notes withHandler:handler];
+}
+
++ (void)request:(NSNumber*)amount withCurrency:(NSString*)currency from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
             handler(nil, error);
@@ -68,7 +77,8 @@
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
                 NSDictionary *params = @{@"transaction" : @{
                                                  @"from": address,
-                                                 @"amount": amount,
+                                                 @"amount_string": amount,
+                                                 @"amount_currency_iso": currency,
                                                  @"notes": notes
                                                  }};
 
