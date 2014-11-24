@@ -13,20 +13,25 @@
 
 + (CBTransaction *)parseTransaction:(id)JSON forAccount:(CBAccount*)account {
     CBTransaction *transaction = [[CBTransaction alloc] init];
-    NSMutableDictionary *tDict = [JSON objectForKey:@"transaction"];
-    transaction.amount = [[tDict objectForKey:@"amount"] objectForKey:@"amount"];
-    transaction.sender = [[[tDict objectForKey:@"sender"] objectForKey:@"email"] isEqualToString:account.email];
-    transaction.name = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"name"] : [[tDict objectForKey:@"sender"] objectForKey:@"name"];
-    if (!([tDict objectForKey:@"hsh"] == [NSNull null])) {
-        transaction.hsh = [tDict objectForKey:@"hsh"];
+    transaction.success = [[JSON objectForKey:@"success"] boolValue];
+    if (transaction.success) {
+        NSMutableDictionary *tDict = [JSON objectForKey:@"transaction"];
+        transaction.amount = [[tDict objectForKey:@"amount"] objectForKey:@"amount"];
+        transaction.sender = [[[tDict objectForKey:@"sender"] objectForKey:@"email"] isEqualToString:account.email];
+        transaction.name = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"name"] : [[tDict objectForKey:@"sender"] objectForKey:@"name"];
+        if (!([tDict objectForKey:@"hsh"] == [NSNull null])) {
+            transaction.hsh = [tDict objectForKey:@"hsh"];
+        }
+        transaction.email = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"email"] : [[tDict objectForKey:@"sender"] objectForKey:@"email"];
+        if (!transaction.name) {
+            transaction.name = [tDict objectForKey:@"recipient_address"];
+        }
+        transaction.transactionId = [tDict objectForKey:@"id"];
+        transaction.timestamp = [tDict objectForKey:@"created_at"];
+        transaction.request = [[tDict objectForKey:@"request"] boolValue];
+    } else {
+        transaction.errors = [JSON objectForKey:@"errors"];
     }
-    transaction.email = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"email"] : [[tDict objectForKey:@"sender"] objectForKey:@"email"];
-    if (!transaction.name) {
-        transaction.name = [tDict objectForKey:@"recipient_address"];
-    }
-    transaction.transactionId = [tDict objectForKey:@"id"];
-    transaction.timestamp = [tDict objectForKey:@"created_at"];
-    transaction.request = [[tDict objectForKey:@"request"] boolValue];
     return transaction;
 }
 
