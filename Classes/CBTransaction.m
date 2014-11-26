@@ -13,24 +13,33 @@
 
 + (CBTransaction *)parseTransaction:(id)JSON forAccount:(CBAccount*)account {
     CBTransaction *transaction = [[CBTransaction alloc] init];
-    NSMutableDictionary *tDict = [JSON objectForKey:@"transaction"];
-    transaction.amount = [[tDict objectForKey:@"amount"] objectForKey:@"amount"];
-    transaction.sender = [[[tDict objectForKey:@"sender"] objectForKey:@"email"] isEqualToString:account.email];
-    transaction.name = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"name"] : [[tDict objectForKey:@"sender"] objectForKey:@"name"];
-    if (!([tDict objectForKey:@"hsh"] == [NSNull null])) {
-        transaction.hsh = [tDict objectForKey:@"hsh"];
+    transaction.success = [[JSON objectForKey:@"success"] boolValue];
+    if (transaction.success) {
+        NSMutableDictionary *tDict = [JSON objectForKey:@"transaction"];
+        transaction.amount = [[tDict objectForKey:@"amount"] objectForKey:@"amount"];
+        transaction.sender = [[[tDict objectForKey:@"sender"] objectForKey:@"email"] isEqualToString:account.email];
+        transaction.name = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"name"] : [[tDict objectForKey:@"sender"] objectForKey:@"name"];
+        if (!([tDict objectForKey:@"hsh"] == [NSNull null])) {
+            transaction.hsh = [tDict objectForKey:@"hsh"];
+        }
+        transaction.email = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"email"] : [[tDict objectForKey:@"sender"] objectForKey:@"email"];
+        if (!transaction.name) {
+            transaction.name = [tDict objectForKey:@"recipient_address"];
+        }
+        transaction.transactionId = [tDict objectForKey:@"id"];
+        transaction.timestamp = [tDict objectForKey:@"created_at"];
+        transaction.request = [[tDict objectForKey:@"request"] boolValue];
+    } else {
+        transaction.errors = [JSON objectForKey:@"errors"];
     }
-    transaction.email = transaction.sender ? [[tDict objectForKey:@"recipient"] objectForKey:@"email"] : [[tDict objectForKey:@"sender"] objectForKey:@"email"];
-    if (!transaction.name) {
-        transaction.name = [tDict objectForKey:@"recipient_address"];
-    }
-    transaction.transactionId = [tDict objectForKey:@"id"];
-    transaction.timestamp = [tDict objectForKey:@"created_at"];
-    transaction.request = [[tDict objectForKey:@"request"] boolValue];
     return transaction;
 }
 
 + (void)send:(NSNumber*)amount to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
+    [self send:amount withCurrency:@"BTC" to:address withNotes:notes withHandler:handler];
+}
+
++ (void)send:(NSNumber*)amount withCurrency:(NSString*)currency to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
             handler(nil, error);
@@ -38,7 +47,8 @@
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
                 NSDictionary *params = @{@"transaction" : @{
                                                  @"to": address,
-                                                 @"amount": amount,
+                                                 @"amount_string": amount,
+                                                 @"amount_currency_iso": currency,
                                                  @"notes": notes
                                                  }};
                 
@@ -56,6 +66,10 @@
 }
 
 + (void)request:(NSNumber*)amount from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
+    [self request:amount withCurrency:@"BTC" from:address withNotes:notes withHandler:handler];
+}
+
++ (void)request:(NSNumber*)amount withCurrency:(NSString*)currency from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
             handler(nil, error);
@@ -63,7 +77,8 @@
             [CBRequest authorizedRequest:^(NSDictionary *result, NSError *error) {
                 NSDictionary *params = @{@"transaction" : @{
                                                  @"from": address,
-                                                 @"amount": amount,
+                                                 @"amount_string": amount,
+                                                 @"amount_currency_iso": currency,
                                                  @"notes": notes
                                                  }};
 
