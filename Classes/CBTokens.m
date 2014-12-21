@@ -16,6 +16,22 @@ NSString* const CBTokensAccessTokenKey = @"CBTokensAccessTokenKey";
 NSString* const CBTokensAuthCodeKey = @"CBTokensAuthCodeKey";
 NSString* const CBTokensExpiryTimeKey = @"CBTokensExpiryTimeKey";
 NSString* const CBTokensRefreshTokenKey = @"CBTokensRefreshTokenKey";
+NSString* const CBTokensFirstRunKey = @"CBTokensFirstRunKey";
+
++ (void)initialize
+{
+    if( self == [CBTokens class] )
+    {
+        if( ![[NSUserDefaults standardUserDefaults] objectForKey:CBTokensFirstRunKey] )
+        {
+            // Clear out tokens left from a previous install of the application
+            [self resetTokens];
+            
+            [[NSUserDefaults standardUserDefaults] setValue:@"dummyValue" forKey:CBTokensFirstRunKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
 
 + (NSString*)accessToken
 {
