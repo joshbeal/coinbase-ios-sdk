@@ -122,10 +122,6 @@ static NSString *permissionsList;
     [[NSNotificationCenter defaultCenter] postNotificationName:CB_AUTH_CODE_NOTIFICATION_TYPE object:nil userInfo:@{CB_AUTH_CODE_URL_KEY:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
 }
 
-+ (NSString *)apiToken {
-    return [CBTokens accessToken];
-}
-
 + (void)registerAuthCode:(NSString *)authCode {
     [CBTokens setAuthCode:authCode];
     [self getAccessToken:permissionsList];
@@ -138,7 +134,7 @@ static NSString *permissionsList;
         } else {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [self apiToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
 
                 CBAccount *account = [[CBAccount alloc] init];
                 account.name = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"name"];
