@@ -17,7 +17,7 @@
         } else {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transfers?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/transfers?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 return handler(JSON, nil);
                 
@@ -29,7 +29,7 @@
 }
 
 + (void)getBuyPrice:(NSNumber*)qty withHandler:(PriceHandler)handler {
-    [CBRequest getRequest:@"https://coinbase.com/api/v1/prices/buy" withHandler:^(NSDictionary *result, NSError *error) {
+    [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/buy" withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
@@ -39,7 +39,7 @@
 }
 
 + (void)getSellPrice:(NSNumber*)qty withHandler:(PriceHandler)handler {
-    [CBRequest getRequest:@"https://coinbase.com/api/v1/prices/sell" withHandler:^(NSDictionary *result, NSError *error) {
+    [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/sell" withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
@@ -49,7 +49,7 @@
 }
 
 + (void)getSpotRate:(NSString *)currency withHandler:(PriceHandler)handler {
-    [CBRequest getRequest:[NSString stringWithFormat:@"https://coinbase.com/api/v1/prices/spot_rate?currency=%@",currency] withHandler:^(NSDictionary *result, NSError *error) {
+    [CBRequest getRequest:[NSString stringWithFormat:@"https://api.coinbase.com/v1/prices/spot_rate?currency=%@",currency] withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
@@ -68,7 +68,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/sells?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager POST:[NSString stringWithFormat:@"https://api.coinbase.com/v1/sells?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 
@@ -89,7 +89,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/buys?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager POST:[NSString stringWithFormat:@"https://api.coinbase.com/v1/buys?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 
@@ -101,13 +101,13 @@
 }
 
 + (void)getExchangeRates:(CBResponseHandler)handler {
-    [CBRequest getRequest:@"https://coinbase.com/api/v1/currencies/exchange_rates" withHandler:^(NSDictionary *result, NSError *error) {
+    [CBRequest getRequest:@"https://api.coinbase.com/v1/currencies/exchange_rates" withHandler:^(NSDictionary *result, NSError *error) {
         handler(result, error);
     }];
 }
 
 + (void)getSupportedCurrencies:(CurrenciesHandler)handler {
-    [CBRequest getRequest:@"https://coinbase.com/api/v1/currencies" withHandler:^(id result, NSError *error) {
+    [CBRequest getRequest:@"https://api.coinbase.com/v1/currencies" withHandler:^(id result, NSError *error) {
         handler(result, error);
     }];
 }
