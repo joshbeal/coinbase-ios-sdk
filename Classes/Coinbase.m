@@ -8,6 +8,7 @@
 
 #import "Coinbase.h"
 #import "CBRequest.h"
+#import "CBTokens.h"
 
 NSString *const CB_AUTH_CODE_NOTIFICATION_TYPE = @"CB_AUTHCODE_NOTIFICATION";
 NSString *const CB_AUTH_CODE_URL_KEY = @"CB_AUTHCODE_URL";
@@ -48,7 +49,7 @@ static NSString *permissionsList;
 + (void)login:(LoginHandler)handler {
     loginBlock = handler;
     permissionsList = @"all";
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"]) {
+    if ([CBTokens authCode]) {
         [self getAccessToken:permissionsList];
     } else {
         [self getAuthCode:permissionsList];
@@ -58,7 +59,7 @@ static NSString *permissionsList;
 + (void)loginWithScope:(NSArray *)permissions withHandler:(LoginHandler)handler {
     loginBlock = handler;
     permissionsList = [permissions componentsJoinedByString:@"+"];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"]) {
+    if ([CBTokens authCode]) {
         [self getAccessToken:permissionsList];
     } else {
         [self getAuthCode:permissionsList];
@@ -66,30 +67,26 @@ static NSString *permissionsList;
 }
 
 + (void)logout {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"refreshToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"expiryTime"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"authCode"];
+    [CBTokens resetTokens];
     isAuthenticated = NO;
 }
 
 + (void)getAccessToken:(NSString*)permissions {
     
-    NSString *authCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"authCode"];
-    NSString *refreshToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"refreshToken"];
+    NSString *authCode = [CBTokens authCode];
+    NSString *refreshToken = [CBTokens refreshToken];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"expiryTime"] == nil) {
+    if ([CBTokens expiryTime] == nil) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=authorization_code&code=%@&redirect_uri=%@&client_id=%@&client_secret=%@", authCode, [Coinbase getCallbackUrl], [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
             NSLog(@"%@", JSON);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
+                [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
+                [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
                 double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                [CBTokens setExpiryTime:[NSNumber numberWithDouble:expiryTime]];
                 isAuthenticated = YES;
 
                 loginBlock(nil);
@@ -106,10 +103,10 @@ static NSString *permissionsList;
             NSLog(@"%@", JSON);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
+                [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
+                [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
                 double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
+                [CBTokens setExpiryTime:[NSNumber numberWithDouble:expiryTime]];
                 isAuthenticated = YES;
 
                 loginBlock(nil);
@@ -125,12 +122,8 @@ static NSString *permissionsList;
     [[NSNotificationCenter defaultCenter] postNotificationName:CB_AUTH_CODE_NOTIFICATION_TYPE object:nil userInfo:@{CB_AUTH_CODE_URL_KEY:[NSURL URLWithString:[NSString stringWithFormat:@"https://coinbase.com/oauth/authorize?response_type=code&client_id=%@&redirect_uri=%@&scope=%@", [Coinbase getClientId], [Coinbase getCallbackUrl], scope]]}];
 }
 
-+ (NSString *)apiToken {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-}
-
 + (void)registerAuthCode:(NSString *)authCode {
-    [[NSUserDefaults standardUserDefaults] setObject:authCode forKey:@"authCode"];
+    [CBTokens setAuthCode:authCode];
     [self getAccessToken:permissionsList];
 }
 
@@ -141,7 +134,7 @@ static NSString *permissionsList;
         } else {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [self apiToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
 
                 CBAccount *account = [[CBAccount alloc] init];
                 account.name = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"name"];

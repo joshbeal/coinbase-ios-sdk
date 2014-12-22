@@ -20,4 +20,5 @@ Pod::Spec.new do |s|
   s.prefix_header_contents = '#import <SystemConfiguration/SystemConfiguration.h>', '#import <MobileCoreServices/MobileCoreServices.h>'
   # s.frameworks = 'SystemConfiguration', 'MobileCoreServices'
   s.dependency 'AFNetworking', '~> 2.0'
+  s.dependency 'UICKeyChainStore', '~> 1.1.0'
 end
