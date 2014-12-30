@@ -41,6 +41,10 @@
 }
 
 + (void)send:(NSNumber*)amount withCurrency:(NSString*)currency to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler {
+    [self send:amount withCurrency:currency to:address withNotes:notes withFee:[NSNumber numberWithInt:0] withHandler:handler];
+}
+
++ (void)send:(NSNumber*)amount withCurrency:(NSString*)currency to:(NSString*)address withNotes:(NSString*)notes withFee:(NSNumber*)fee withHandler:(TransactionHandler)handler {
     [Coinbase getAccount:^(CBAccount *account, NSError *error) {
         if (error) {
             handler(nil, error);
@@ -50,7 +54,8 @@
                                                  @"to": address,
                                                  @"amount_string": amount,
                                                  @"amount_currency_iso": currency,
-                                                 @"notes": notes
+                                                 @"notes": notes,
+                                                 @"user_fee":fee
                                                  }};
                 
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

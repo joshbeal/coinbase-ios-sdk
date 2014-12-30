@@ -28,6 +28,7 @@ typedef void (^RequestActionHandler)(BOOL success, NSError *error);
 
 + (void)send:(NSNumber*)amount to:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler;
 + (void)send:(NSNumber *)amount withCurrency:(NSString*)currency to:(NSString *)address withNotes:(NSString *)notes withHandler:(TransactionHandler)handler;
++ (void)send:(NSNumber *)amount withCurrency:(NSString*)currency to:(NSString *)address withNotes:(NSString *)notes withFee:(NSNumber*)fee withHandler:(TransactionHandler)handler;
 + (void)request:(NSNumber*)amount from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler;
 + (void)request:(NSNumber*)amount withCurrency:(NSString*)currency from:(NSString*)address withNotes:(NSString*)notes withHandler:(TransactionHandler)handler;
 
