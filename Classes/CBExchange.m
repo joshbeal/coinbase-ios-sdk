@@ -7,6 +7,7 @@
 //
 
 #import "CBExchange.h"
+#import "CBTokens.h"
 
 @implementation CBExchange
 + (void)getTransfers:(CBResponseHandler)handler {
@@ -16,7 +17,7 @@
         } else {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transfers?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transfers?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 return handler(JSON, nil);
                 
@@ -67,7 +68,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/sells?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/sells?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 
@@ -88,7 +89,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/buys?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/api/v1/buys?access_token=%@", [CBTokens accessToken]] parameters:params success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 

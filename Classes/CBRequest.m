@@ -7,14 +7,15 @@
 //
 
 #import "CBRequest.h"
+#import "CBTokens.h"
 #import "Coinbase.h"
 
 @implementation CBRequest
 + (void)authorizedRequest:(CBResponseHandler)handler {
     double currentTime = [[NSDate date] timeIntervalSince1970];
-    double expiryTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"expiryTime"] doubleValue];
+    double expiryTime = [[CBTokens expiryTime] doubleValue];
     if (currentTime >= expiryTime) {
-        NSString *refreshToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"refreshToken"];
+        NSString *refreshToken = [CBTokens refreshToken];
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -22,11 +23,10 @@
             NSLog(@"%@", JSON);
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"access_token"] forKey:@"accessToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:[JSON objectForKey:@"refresh_token"] forKey:@"refreshToken"];
+                [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
+                [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
                 double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:expiryTime] forKey:@"expiryTime"];
-
+                [CBTokens setExpiryTime:[NSNumber numberWithDouble:expiryTime]];
                 handler(JSON, nil);
             });
             
