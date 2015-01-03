@@ -30,8 +30,9 @@
                 handler(JSON, nil);
             });
             
-        } failure:nil];
-        
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            handler(nil, error);
+        }];
     } else {
         handler(nil, nil); // already authorized
     }
