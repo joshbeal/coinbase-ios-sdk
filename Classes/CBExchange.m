@@ -38,12 +38,32 @@
     }];
 }
 
++ (void)getBuyPriceWithOutFee:(NSNumber*)qty withHandler:(PriceHandler)handler {
+    [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/buy" withHandler:^(NSDictionary *result, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler([[result objectForKey:@"subtotal"] objectForKey:@"amount"], nil);
+        }
+    }];
+}
+
 + (void)getSellPrice:(NSNumber*)qty withHandler:(PriceHandler)handler {
     [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/sell" withHandler:^(NSDictionary *result, NSError *error) {
         if (error) {
             handler(nil, error);
         } else {
             handler([[result objectForKey:@"total"] objectForKey:@"amount"], nil);
+        }
+    }];
+}
+
++ (void)getSellPriceWithOutFee:(NSNumber*)qty withHandler:(PriceHandler)handler {
+    [CBRequest getRequest:@"https://api.coinbase.com/v1/prices/sell" withHandler:^(NSDictionary *result, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        } else {
+            handler([[result objectForKey:@"subtotal"] objectForKey:@"amount"], nil);
         }
     }];
 }
