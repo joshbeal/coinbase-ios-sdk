@@ -11,28 +11,45 @@
 #import "Coinbase.h"
 
 @implementation CBRequest
+
+static NSMutableArray *queuedAuthHandlers = nil;
+
 + (void)authorizedRequest:(CBResponseHandler)handler {
     double currentTime = [[NSDate date] timeIntervalSince1970];
     double expiryTime = [[CBTokens expiryTime] doubleValue];
     if (currentTime >= expiryTime) {
-        NSString *refreshToken = [CBTokens refreshToken];
+        // Refresh is in progress
+        if (queuedAuthHandlers) {
+            [queuedAuthHandlers addObject:handler];
+        } else {
+            queuedAuthHandlers = [[NSMutableArray alloc] init];
+            [queuedAuthHandlers addObject:handler];
         
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@", refreshToken, [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-            NSLog(@"%@", JSON);
+            NSString *refreshToken = [CBTokens refreshToken];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@", refreshToken, [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+                NSLog(@"%@", JSON);
 
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
-                [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
-                double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
-                [CBTokens setExpiryTime:[NSNumber numberWithDouble:expiryTime]];
-                handler(JSON, nil);
-            });
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            handler(nil, error);
-        }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
+                    [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
+                    double expiryTime = [[NSDate date] timeIntervalSince1970] + 7200;
+                    [CBTokens setExpiryTime:[NSNumber numberWithDouble:expiryTime]];
+                    
+                    for (CBResponseHandler queuedAuthHandler in queuedAuthHandlers) {
+                        queuedAuthHandler(JSON, nil);
+                    }
+                    queuedAuthHandlers = nil;
+                });
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                for (CBResponseHandler queuedHandler in queuedAuthHandlers) {
+                    queuedHandler(nil, error);
+                }
+                queuedAuthHandlers = nil;
+            }];
+        }
     } else {
         handler(nil, nil); // already authorized
     }
