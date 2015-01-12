@@ -80,8 +80,6 @@ static NSString *permissionsList;
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=authorization_code&code=%@&redirect_uri=%@&client_id=%@&client_secret=%@", authCode, [Coinbase getCallbackUrl], [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-            NSLog(@"%@", JSON);
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
                 [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
@@ -100,8 +98,6 @@ static NSString *permissionsList;
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         [manager POST:[NSString stringWithFormat:@"https://coinbase.com/oauth/token?grant_type=refresh_token&refresh_token=%@&client_id=%@&client_secret=%@", refreshToken, [Coinbase getClientId], [Coinbase getClientSecret]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-            NSLog(@"%@", JSON);
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [CBTokens setAccessToken:[JSON objectForKey:@"access_token"]];
                 [CBTokens setRefreshToken:[JSON objectForKey:@"refresh_token"]];
