@@ -134,18 +134,20 @@ static NSString *permissionsList;
         } else {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/users?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/users/self?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
 
+                NSDictionary *user = [JSON objectForKey:@"user"];
+                
                 CBAccount *account = [[CBAccount alloc] init];
-                account.name = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"name"];
-                account.email = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"email"];
-                account.balance = [[[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"balance"] objectForKey:@"amount"];
-                account.timeZone = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"time_zone"];
-                account.cbId = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"id"];
-                account.buyLevel = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"buy_level"];
-                account.buyLimit = [[[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"buy_limit"] objectForKey:@"amount"];
-                account.sellLevel = [[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"sell_level"];
-                account.sellLimit = [[[[[JSON objectForKey:@"users"] objectAtIndex:0] objectForKey:@"user"] objectForKey:@"sell_limit"] objectForKey:@"amount"];
+                account.name = [user objectForKey:@"name"];
+                account.email = [user objectForKey:@"email"];
+                account.balance = [[user objectForKey:@"balance"] objectForKey:@"amount"];
+                account.timeZone = [user objectForKey:@"time_zone"];
+                account.cbId = [user objectForKey:@"id"];
+                account.buyLevel = [user objectForKey:@"buy_level"];
+                account.buyLimit = [[user objectForKey:@"buy_limit"] objectForKey:@"amount"];
+                account.sellLevel = [user objectForKey:@"sell_level"];
+                account.sellLimit = [[user objectForKey:@"sell_limit"] objectForKey:@"amount"];
                 
                 handler(account, nil);
                 

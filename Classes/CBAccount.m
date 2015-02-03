@@ -19,7 +19,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/transactions?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/transactions?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 NSMutableArray *transactions = [[NSMutableArray alloc] init];
                 NSArray *array = [JSON objectForKey:@"transactions"];
@@ -59,7 +59,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/account_changes?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/account_changes?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 
@@ -78,9 +78,9 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/account/balance?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/accounts/primary?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
-                handler([JSON objectForKey:@"amount"], nil);
+                handler([[[JSON objectForKey:@"account"] objectForKey:@"balance"] objectForKey:@"amount"], nil);
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 handler(nil, error);
@@ -97,9 +97,9 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/account/receive_address?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/addresses?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
-                handler([JSON objectForKey:@"address"], nil);
+                handler([[[[JSON objectForKey:@"addresses"] objectAtIndex:0] objectForKey:@"address"] objectForKey:@"address"], nil);
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 handler(nil, error);
@@ -116,7 +116,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/addresses?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/addresses?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 
@@ -135,7 +135,7 @@
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
-            [manager GET:[NSString stringWithFormat:@"https://coinbase.com/api/v1/contacts?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [manager GET:[NSString stringWithFormat:@"https://api.coinbase.com/v1/contacts?access_token=%@", [CBTokens accessToken]] parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
                 
                 handler(JSON, nil);
                 
