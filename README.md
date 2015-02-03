@@ -2,6 +2,8 @@
 
 This open-source iOS library allows you to integrate Coinbase into your iOS application.
 
+## DEPRECATED: See the official [Coinbase SDK](https://github.com/coinbase/coinbase-ios-sdk)
+
 ##Getting Started
 
 * Register your application on the [Coinbase website](https://coinbase.com/oauth/applications).
